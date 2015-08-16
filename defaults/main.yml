@@ -1,0 +1,10 @@
+---
+# defaults file for bootstrap-ubuntu
+
+locale: en_GB.UTF-8
+language: 'en_GB:en'
+timezone: Europe/London
+
+user_name: deploy
+
+ssh_port: 22

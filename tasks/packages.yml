@@ -1,0 +1,17 @@
+---
+- name: apt | update
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: apt | install packages
+  apt: pkg={{ item }} state=present update_cache=yes
+  with_items:
+    - vim
+    - zlib1g-dev
+    - python
+    - python-apt
+    - python-pycurl
+    - python-simplejson
+    - python-software-properties
+
+- name: apt | dist upgrade
+  apt: update_cache=yes upgrade=dist

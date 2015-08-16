@@ -1,0 +1,7 @@
+---
+# tasks file for bootstrap-ubuntu
+
+ - include: locale.yml
+ - include: packages.yml
+ - include: users.yml
+ - include: security.yml

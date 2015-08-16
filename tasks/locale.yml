@@ -1,0 +1,13 @@
+# based on https://github.com/hatoishi/ansible-dev/blob/master/common/tasks/main.yml
+- name: locale | generate
+  command: /usr/sbin/locale-gen {{locale}}
+
+- name: locale | update
+  command: /usr/sbin/update-locale LANG={{locale}} LC_ALL={{locale}} LANGUAGE={{language}}
+
+- name: locale | timezone
+  command: /bin/cp /usr/share/zoneinfo/{{timezone}} /etc/localtime
+
+- name: locale | timezone tzdata
+  template: src=timezone dest=/etc/timezone
+  notify: update tzdata

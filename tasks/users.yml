@@ -1,0 +1,21 @@
+---
+- name: group | create admin group
+  group: name=admin state=present
+
+- name: user | create deploy user
+  user:
+    name={{ user_name }}
+    groups=admin,adm
+    shell=/bin/bash
+
+- name: authorized_key | install
+  authorized_key: 
+    user={{ user_name }}
+    key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    state=present
+
+- name: file | ensure sudoers.d is enabled
+  lineinfile: dest=/etc/sudoers state=present backup=yes regexp="^#includedir /etc/sudoers.d" line="#includedir /etc/sudoers.d"
+
+- name: copy | ensure the user can execute sudo commands without a password
+  copy: content="%{{ user_name }} ALL=(ALL) NOPASSWD:ALL" dest=/etc/sudoers.d/{{ user_name }} owner=root group=root mode=0440
