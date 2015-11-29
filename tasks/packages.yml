@@ -12,6 +12,9 @@
     - python-pycurl
     - python-simplejson
     - python-software-properties
+    - git
+    - rsnapshot
+    - tree
 
 - name: apt | dist upgrade
   apt: update_cache=yes upgrade=dist

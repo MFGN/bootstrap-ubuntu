@@ -18,6 +18,3 @@
 - name: security | remove DNS check
   lineinfile: dest=/etc/ssh/sshd_config regexp="^UseDNS" line="UseDNS no" state=present
   notify: restart ssh
-
-- name: security | install fail2ban
-  apt: pkg=fail2ban state=present
